@@ -1,0 +1,17 @@
+<launch>
+    <!-- rosbag recorder -->
+    <arg name="robot_name" default="rmf_owl" />
+    <arg name="robot_type" default="rmf_owl" />
+    <arg name="file_path" default="/home/arl/ROSBAGS/controller_tuning" />
+    <arg name="file_prefix" default="rmf_owl" />
+
+    <!-- have rosbag recorder node with selected topics only-->
+    <node pkg="rosbag" type="record" name="rosbag_record_diag"
+       args="record -o $(arg file_path)/$(arg file_prefix)
+    /m100/odom
+    /m100/cmd_vel
+    /tf
+    "/>
+
+
+</launch>

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="world" default="world"/>
+    <arg name="robot_name" default="rmf_owl"/>
+    <arg name="robot_type" default="rmf_owl"/>
+
+    <arg name="link_name" value="base_link"/>
+    <arg name="sensor_prefix" value="/world/$(arg world)/model/$(arg robot_name)/link/$(arg link_name)/sensor"/>
+
+    <node
+        pkg="ros_ign_bridge"
+        type="parameter_bridge"
+        name="ros_ign_bridge_clock"
+        args="/clock@rosgraph_msgs/Clock[gz.msgs.Clock">
+    </node>
+
+    <!-- create multipe bridges so that it can run in parallel -->
+    <group ns="$(arg robot_name)">
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_pose"
+            args="/model/$(arg robot_name)/pose@tf2_msgs/TFMessage[gz.msgs.Pose_V">
+            <remap from="/model/$(arg robot_name)/pose" to="$(arg robot_name)/tf"/>
+        </node>
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_pose_static"
+            args="/model/$(arg robot_name)/pose_static@tf2_msgs/TFMessage[gz.msgs.Pose_V">
+            <remap from="/model/$(arg robot_name)/pose_static" to="$(arg robot_name)/tf_static"/>
+        </node>
+
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_twist"
+            args="/model/$(arg robot_name)/cmd_vel@geometry_msgs/Twist@gz.msgs.Twist">
+            <remap from="/model/$(arg robot_name)/cmd_vel" to="$(arg robot_name)/cmd_vel"/>
+        </node>
+
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_odom"
+            args="/model/$(arg robot_name)/odometry@nav_msgs/Odometry[gz.msgs.Odometry">
+            <remap from="/model/$(arg robot_name)/odometry" to="$(arg robot_name)/odom"/>
+        </node>
+
+        <!-- RGBD camera -->
+        <node
+            pkg="ros_ign_image"
+            type="image_bridge"
+            name="ros_ign_depth_cam"
+            args="$(arg sensor_prefix)/depth_cam/depth_image">
+            <remap from="$(arg sensor_prefix)/depth_cam/depth_image" to="$(arg robot_name)/depth_image"/>
+        </node>
+
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_depth_cam_points"
+            args="$(arg sensor_prefix)/depth_cam/depth_image/points@sensor_msgs/PointCloud2[gz.msgs.PointCloudPacked">
+            <remap from="$(arg sensor_prefix)/depth_cam/depth_image/points" to="$(arg robot_name)/depth_points"/>
+        </node>
+
+        <!--IMU-->
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_imu"
+            args="$(arg sensor_prefix)/imu_sensor/imu@sensor_msgs/Imu[gz.msgs.IMU">
+            <remap from="$(arg sensor_prefix)/imu_sensor/imu" to="$(arg robot_name)/imu/data"/>
+        </node>
+    </group>
+</launch>

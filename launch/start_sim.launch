@@ -1,0 +1,51 @@
+<launch>
+    <param name="use_sim_time" value="true" />
+
+    <!-- world parameters -->
+    <arg name="resource_dir" default="$(find lmf_sim)/resources/worlds" />
+    <arg name="verbosity" default="4"/>
+    <arg name="world" default="empty_world"/>
+
+    <!-- robot parameters -->
+    <arg name="robot_name" default="rmf_owl"/>
+    <arg name="robot_type" default="rmf_owl"/>
+    <arg name="allow_renaming" default="true" />
+    <arg name="x" default="-1.0" />
+    <arg name="y" default="-1.0" />
+    <arg name="z" default="1.7" />
+    <arg name="R" default="0.0" />
+    <arg name="P" default="0.0" />
+    <arg name="Y" default="0.0" />
+
+    <!-- spawn world -->
+    <include file="$(find ros_ign_gazebo)/launch/ign_gazebo.launch">
+        <env name="IGN_GAZEBO_MODEL_PATH" value="$(arg resource_dir)" />
+        <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(arg resource_dir)" />
+        <arg name="ign_args" value="-r -v $(arg verbosity) $(arg world).sdf"/>
+    </include>
+
+    <node pkg="ros_ign_bridge" type="parameter_bridge" name="$(anon ros_ign_bridge)"
+    args="/clock@rosgraph_msgs/Clock[ignition.msgs.Clock"/>
+
+    <!-- spawn robot -->
+    <node pkg="ros_ign_gazebo" type="create" name="spawn_model" args="
+        -world $(arg world)
+        -name $(arg robot_name)
+        -allow_renaming $(arg allow_renaming)
+        -file $(find lmf_sim)/resources/robots/$(arg robot_type)/model.sdf
+        -x $(arg x) -y $(arg y) -z $(arg z)
+        -R $(arg R) -P $(arg P) -Y $(arg Y)
+        ">
+        <env name="IGN_GAZEBO_MODEL_PATH" value="$(find lmf_sim)/resources" />
+        <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(find lmf_sim)/resources" />
+    </node>
+
+    <include file="$(find lmf_sim)/launch/topics.launch">
+        <arg name="robot_name" value="$(arg robot_name)" />
+        <arg name="robot_type" value="$(arg robot_type)" />
+        <arg name="world" value="$(arg world)" />
+    </include>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher2"
+    args="0 0 0 0 0 0 1.0 /$(arg world) /$(arg robot_name)/odom" />
+</launch>
