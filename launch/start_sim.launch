@@ -19,13 +19,15 @@
 
     <!-- spawn world -->
     <include file="$(find ros_ign_gazebo)/launch/ign_gazebo.launch">
-        <env name="IGN_GAZEBO_MODEL_PATH" value="$(arg resource_dir)" />
-        <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(arg resource_dir)" />
+        <env name="GZ_SIM_MODEL_PATH" value="$(arg resource_dir)" />
+        <env name="GZ_SIM_RESOURCE_PATH" value="$(arg resource_dir)" />
         <arg name="ign_args" value="-r -v $(arg verbosity) $(arg world).sdf"/>
     </include>
 
-    <node pkg="ros_ign_bridge" type="parameter_bridge" name="$(anon ros_ign_bridge)"
-    args="/clock@rosgraph_msgs/Clock[ignition.msgs.Clock"/>
+    <node pkg="ros_ign_bridge" type="parameter_bridge"
+        name="$(anon ros_ign_bridge)"
+        args="/clock@rosgraph_msgs/Clock[gz.msgs.Clock"
+    />
 
     <!-- spawn robot -->
     <node pkg="ros_ign_gazebo" type="create" name="spawn_model" args="
@@ -36,14 +38,14 @@
         -x $(arg x) -y $(arg y) -z $(arg z)
         -R $(arg R) -P $(arg P) -Y $(arg Y)
         ">
-        <env name="IGN_GAZEBO_MODEL_PATH" value="$(find lmf_sim)/resources" />
-        <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(find lmf_sim)/resources" />
+        <env name="GZ_SIM_MODEL_PATH" value="$(find lmf_sim)/resources" />
+        <env name="GZ_SIM_RESOURCE_PATH" value="$(find lmf_sim)/resources" />
     </node>
 
     <include file="$(find lmf_sim)/launch/topics.launch">
+        <arg name="world" value="$(arg world)" />
         <arg name="robot_name" value="$(arg robot_name)" />
         <arg name="robot_type" value="$(arg robot_type)" />
-        <arg name="world" value="$(arg world)" />
     </include>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher2"

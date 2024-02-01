@@ -120,16 +120,6 @@
             </imu>
         </sensor>
 
-        <sensor name="air_pressure" type="air_pressure">
-            <always_on>1</always_on>
-            <update_rate>20</update_rate>
-            <air_pressure>
-                <reference_altitude>0</reference_altitude>
-                <noise type="gaussian">
-                    <mean>0.00000008</mean>
-                </noise>
-            </air_pressure>
-        </sensor>
 
         <sensor name="magnetometer" type="magnetometer">
             <always_on>1</always_on>
@@ -156,11 +146,53 @@
             </magnetometer>
         </sensor>
 
+
+        <sensor name="rgb_cam" type="camera">
+            <pose>0.180 0 -0.025 0 0 0</pose>
+            <always_on>1</always_on>
+            <update_rate>30</update_rate>
+            <visualize>true</visualize>
+            <camera name="rgb_cam">
+                <horizontal_fov>2.0944</horizontal_fov>
+                <lens>
+                    <intrinsics>
+                        <fx>252.91646</fx>
+                        <fy>252.91646</fy>
+                        <cx>240.0</cx>
+                        <cy>135.0</cy>
+                        <s>1</s>
+                    </intrinsics>
+                </lens>
+                <distortion>
+                    <k1>0.0</k1>
+                    <k2>0.0</k2>
+                    <k3>0.0</k3>
+                    <p1>0.0</p1>
+                    <p2>0.0</p2>
+                    <center>0.5 0.5</center>
+                </distortion>
+                <image>
+                    <width>480</width>
+                    <height>270</height>
+                    <format>R8G8B8</format>
+                </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>20</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </camera>
+        </sensor>
+
         <sensor name="depth_cam" type="depth_camera">
             <update_rate>10</update_rate>
             <pose>0.180 0 -0.025 0 0 0</pose>
             <camera name="depth_cam">
-                <horizontal_fov>1.51844</horizontal_fov>
+                <horizontal_fov>2.0944</horizontal_fov>
                 <lens>
                     <intrinsics>
                         <fx>252.91646</fx>
@@ -190,9 +222,53 @@
                 <noise>
                     <type>gaussian</type>
                     <mean>0</mean>
-                    <stddev>0.000</stddev>
+                    <stddev>0.007</stddev>
                 </noise>
             </camera>
+        </sensor>
+
+
+        <visual name="laser_visual">
+            <pose>0 0 0.05 0 0 0</pose>
+            <geometry>
+                <cylinder>
+                    <radius>0.03</radius>
+                    <length>0.1</length>
+                </cylinder>
+            </geometry>
+        </visual>
+        <sensor name="lidar" type="gpu_ray">
+            <!-- The laser is patterned off of the X1 medium range lidar. -->
+            <pose>0 0 0.05 0 0 0</pose>
+            <update_rate>10</update_rate>
+            <visualize>true</visualize>
+            <always_on>true</always_on>
+            <lidar>
+                <scan>
+                    <horizontal>
+                        <samples>440</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-3.1459</min_angle>
+                        <max_angle>3.1459</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>16</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.79</min_angle>
+                        <max_angle>0.79</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.4</min>
+                    <max>50</max>
+                    <resolution>0.01</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0</mean>
+                    <stddev>0.03</stddev>
+                </noise>
+            </lidar>
         </sensor>
     </link>
 
@@ -471,20 +547,19 @@
 
 
     <!-- plugins -->
-    <plugin filename="libignition-gazebo-pose-publisher-system.so"
-    name="ignition::gazebo::systems::PosePublisher">
-        <publish_link_pose>false</publish_link_pose>
+    <plugin filename="libgz-sim-pose-publisher-system.so" name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
         <publish_sensor_pose>true</publish_sensor_pose>
         <publish_collision_pose>false</publish_collision_pose>
         <publish_visual_pose>false</publish_visual_pose>
-        <publish_nested_model_pose>false</publish_nested_model_pose>
+        <publish_nested_model_pose>true</publish_nested_model_pose>
         <use_pose_vector_msg>true</use_pose_vector_msg>
         <static_publisher>true</static_publisher>
-        <static_update_frequency>200</static_update_frequency>
+        <static_update_frequency>60</static_update_frequency>
     </plugin>
-    <plugin filename="libignition-gazebo-pose-publisher-system.so"
-    name="ignition::gazebo::systems::PosePublisher">
-        <publish_link_pose>true</publish_link_pose>
+
+    <plugin filename="libgz-sim-pose-publisher-system.so" name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>false</publish_link_pose>
         <publish_sensor_pose>false</publish_sensor_pose>
         <publish_collision_pose>false</publish_collision_pose>
         <publish_visual_pose>false</publish_visual_pose>
@@ -493,13 +568,11 @@
         <static_publisher>false</static_publisher>
     </plugin>
 
-    <plugin filename="libignition-gazebo-odometry-publisher-system.so"
-    name="ignition::gazebo::systems::OdometryPublisher">
+    <plugin filename="libgz-sim-odometry-publisher-system.so" name="gz::sim::systems::OdometryPublisher">
 		<dimensions>3</dimensions>
     </plugin>
 
-    <plugin filename="libignition-gazebo-multicopter-motor-model-system.so"
-    name="ignition::gazebo::systems::MulticopterMotorModel">
+    <plugin filename="libgz-sim-multicopter-motor-model-system.so" name="gz::sim::systems::MulticopterMotorModel">
         <robotNamespace>model/rmf_owl</robotNamespace>
         <jointName>rotor_0_joint</jointName>
         <linkName>rotor_0</linkName>
@@ -518,8 +591,7 @@
         <motorType>velocity</motorType>
     </plugin>
 
-    <plugin filename="libignition-gazebo-multicopter-motor-model-system.so"
-    name="ignition::gazebo::systems::MulticopterMotorModel">
+    <plugin filename="libgz-sim-multicopter-motor-model-system.so" name="gz::sim::systems::MulticopterMotorModel">
         <robotNamespace>model/rmf_owl</robotNamespace>
         <jointName>rotor_1_joint</jointName>
         <linkName>rotor_1</linkName>
@@ -538,8 +610,7 @@
         <motorType>velocity</motorType>
     </plugin>
 
-    <plugin filename="libignition-gazebo-multicopter-motor-model-system.so"
-    name="ignition::gazebo::systems::MulticopterMotorModel">
+    <plugin filename="libgz-sim-multicopter-motor-model-system.so" name="gz::sim::systems::MulticopterMotorModel">
         <robotNamespace>model/rmf_owl</robotNamespace>
         <jointName>rotor_2_joint</jointName>
         <linkName>rotor_2</linkName>
@@ -558,8 +629,7 @@
         <motorType>velocity</motorType>
     </plugin>
 
-    <plugin filename="libignition-gazebo-multicopter-motor-model-system.so"
-    name="ignition::gazebo::systems::MulticopterMotorModel">
+    <plugin filename="libgz-sim-multicopter-motor-model-system.so" name="gz::sim::systems::MulticopterMotorModel">
         <robotNamespace>model/rmf_owl</robotNamespace>
         <jointName>rotor_3_joint</jointName>
         <linkName>rotor_3</linkName>
@@ -578,13 +648,15 @@
         <motorType>velocity</motorType>
     </plugin>
 
-    <plugin filename="libignition-gazebo-multicopter-control-system.so"
-    name="ignition::gazebo::systems::MulticopterVelocityControl">
+    <plugin filename="libgz-sim-multicopter-control-system.so" name="gz::sim::systems::MulticopterVelocityControl">
+    <!-- <plugin filename="libgz-sim-multicopter-position-control-system.so" name="gz::sim::systems::MulticopterPositionControl"> -->
         <robotNamespace>model/rmf_owl</robotNamespace>
         <commandSubTopic>cmd_vel</commandSubTopic>
+        <commandSubTopic>cmd_pos</commandSubTopic>
         <motorControlPubTopic>command/motor_speed</motorControlPubTopic>
-        <enableSubTopic>velocity_controller/enable</enableSubTopic>
+        <enableSubTopic>enable</enableSubTopic>
         <comLinkName>base_link</comLinkName>
+        <positionGain>6 6 10</positionGain>
         <velocityGain>6 6 10</velocityGain>
         <attitudeGain>4 4 2</attitudeGain>
         <angularRateGain>0.7 0.7 0.7</angularRateGain>
