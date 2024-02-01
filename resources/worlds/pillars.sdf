@@ -1,0 +1,692 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+<world name="pillars">
+    <physics name="1ms" type="ignored">
+        <max_step_size>0.001</max_step_size>
+        <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="libgz-sim-physics-system.so" name="gz::sim::systems::Physics"></plugin>
+    <plugin filename="libgz-sim-sensors-system.so" name="gz::sim::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="libgz-sim-scene-broadcaster-system.so" name="gz::sim::systems::SceneBroadcaster"></plugin>
+    <plugin filename="libgz-sim-user-commands-system.so" name="gz::sim::systems::UserCommands"></plugin>
+
+    <!-- sun and ground -->
+    <light type="directional" name="sun">
+        <cast_shadows>true</cast_shadows>
+        <pose>0 0 10 0 0 0</pose>
+        <diffuse>0.8 0.8 0.8 1</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+        <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+        </attenuation>
+        <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+        <static>true</static>
+        <link name="link">
+            <pose>0 0 -0.5 0 0 0</pose>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>50 50 0.1</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>20 20 0.1</size>
+                    </box>
+                </geometry>
+                <material>
+                    <ambient>0.8 0.8 0.8 1</ambient>
+                    <diffuse>0.8 0.8 0.8 1</diffuse>
+                    <specular>0.8 0.8 0.8 1</specular>
+                </material>
+            </visual>
+        </link>
+    </model>
+
+
+
+
+    <!-- pillars -->
+    <model name="rod20">
+        <pose>-0.5962195651248301 -0.13511467152719003 0.7509072292105516 0.0 0.0 -2.322969249595137</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod21">
+        <pose>6.929399558452296 -4.968608688917902 0.08197182604034947 0.0 0.0 2.518176501528531</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod22">
+        <pose>12.03782852466339 1.629299434217791 1.9628220508638439 0.0 0.0 2.1672310481837966</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod23">
+        <pose>-1.326404483557992 3.6456382028918934 -0.32533797054061675 0.0 0.0 2.266616831586777</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod24">
+        <pose>-1.5320243106310194 1.176988305104234 1.4795079391196184 0.0 0.0 -2.9603563123912044</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod25">
+        <pose>-1.4755717037993623 -0.593762355271938 1.3618353953104219 0.0 0.0 1.272454173530316</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod26">
+        <pose>14.938996435316405 -1.8723082614284872 0.7204933290662239 0.0 0.0 1.047825092516458</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod27">
+        <pose>0.9810349273095529 -2.8030351578807924 -0.6686929281344867 0.0 0.0 -2.0749010520516857</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod28">
+        <pose>8.047487761845215 -4.089605032699679 1.111174542131518 0.0 0.0 -2.2676884181221855</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod29">
+        <pose>-8.863330744700301 -1.4468232685773543 -0.6275973847753499 0.0 0.0 -1.490455685157367</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod30">
+        <pose>0.5281687146927112 -3.563891884314354 0.2566651800652111 0.0 0.0 -2.534004889268199</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod31">
+        <pose>13.527893393997587 2.35195097172738 -0.5029062205876375 0.0 0.0 -2.6723814034518307</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod32">
+        <pose>-14.493531667866325 1.4836936226957764 1.0504842894467692 0.0 0.0 -2.6891523662036887</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod33">
+        <pose>14.221235037305703 2.806416295344895 0.5976217941411215 0.0 0.0 -0.9308893908626747</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod34">
+        <pose>9.464129073874297 -2.479849411999826 0.06804912862293966 0.0 0.0 1.7913612659166747</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod35">
+        <pose>1.753414926585645 0.14926306755197682 1.513708097569248 0.0 0.0 -2.593044774296912</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod36">
+        <pose>-5.72268801180568 -2.196006616010232 -0.6605869257015842 0.0 0.0 -0.35169293339406416</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod37">
+        <pose>1.8129315623545104 -0.7715574093258901 -0.3043233296916129 0.0 0.0 1.2757844614339184</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod38">
+        <pose>11.300437843830338 -2.9156994011833195 0.439402228842912 0.0 0.0 2.7144378255702346</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod39">
+        <pose>-12.718258907566714 -3.337356039801244 1.0228187308064616 0.0 0.0 -0.8140245279609744</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod40">
+        <pose>12.974031564950891 -3.6466257361296073 0.47412985431328813 0.0 0.0 -1.463357355122578</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod41">
+        <pose>5.601326898222137 0.4764138660187536 0.8712678889281813 0.0 0.0 1.562581659428127</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod42">
+        <pose>-7.731632322998876 0.5378197791360995 0.9302068148249139 0.0 0.0 1.2823340913115668</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod43">
+        <pose>-4.717017306762694 1.6255869493657205 1.8368237713193891 0.0 0.0 -2.6887828952330244</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod44">
+        <pose>-6.921619205483182 4.39650412623225 -0.7667814580173424 0.0 0.0 0.9482561774872469</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod45">
+        <pose>-13.781696566147026 -0.5808151078382098 -0.014401837199860545 0.0 0.0 0.8326496469368907</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod46">
+        <pose>-9.144203978249736 -2.7542637956913563 -0.4716439055405778 0.0 0.0 -2.5124296859696456</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod47">
+        <pose>0.20531374267898173 0.1331506878960944 1.6596842464267314 0.0 0.0 0.6488818501499161</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod48">
+        <pose>-9.067880314704436 -0.10843742114654731 0.17501888523026143 0.0 0.0 -2.498883953108616</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+    <model name="rod49">
+        <pose>-6.0173494361436966 2.2875695961350493 0.06963172566113696 0.0 0.0 1.5325039511558511</pose>
+        <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </visual>
+                <collision name="collision">
+                    <geometry>
+                        <box>
+                            <size>1.0 0.1 10.0</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
+    </model>
+
+</world>
+</sdf>
