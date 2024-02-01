@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sdf version="1.8">
-<world name="pillars">
+<world name="panels">
     <physics name="1ms" type="ignored">
         <max_step_size>0.001</max_step_size>
         <real_time_factor>1.0</real_time_factor>
@@ -31,7 +31,7 @@
     <model name="ground_plane">
         <static>true</static>
         <link name="link">
-            <pose>0 0 -0.5 0 0 0</pose>
+            <pose>0 0 -0.05 0 0 0</pose>
             <collision name="collision">
                 <geometry>
                     <box>
@@ -56,8 +56,7 @@
 
 
 
-
-    <!-- pillars -->
+    <!-- obstacles -->
     <model name="rod20">
         <pose>-0.5962195651248301 -0.13511467152719003 0.7509072292105516 0.0 0.0 -2.322969249595137</pose>
         <static>true</static>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sdf version="1.8">
-<world name="empty_world">
+<world name="pillar">
     <physics name="1ms" type="ignored">
         <max_step_size>0.001</max_step_size>
         <real_time_factor>1.0</real_time_factor>
@@ -57,5 +57,37 @@
 
 
     <!-- obstacles -->
+    <model name="w1">
+        <pose>5.1 0 0 0 0 1.56</pose>
+        <static>1</static>
+        <link name="main">
+            <visual name="wall">
+                <pose>0 0 1.5 0 0 0</pose>
+                <geometry>
+                    <box><size>10 0.2 3.1</size></box>
+                </geometry>
+                <material>
+                    <ambient>0.3 0.3 0.3 1</ambient>
+                    <diffuse>1.0 1.0 1.0 1</diffuse>
+                </material>
+            </visual>
+        </link>
+    </model>
+
+    <model name="p1">
+        <pose>2 0 1.5 0 0 0</pose>
+        <static>1</static>
+        <link name="main">
+            <visual name="pillar">
+                <geometry>
+                    <cylinder><radius>0.4</radius><length>3.1</length></cylinder>
+                </geometry>
+                <material>
+                    <ambient>0.3 0.3 0.3 1</ambient>
+                    <diffuse>1.0 1.0 1.0 1</diffuse>
+                </material>
+            </visual>
+        </link>
+    </model>
 </world>
 </sdf>
