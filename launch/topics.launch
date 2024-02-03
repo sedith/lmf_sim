@@ -5,7 +5,7 @@
     <arg name="robot_type"/>
 
     <arg name="link_name" value="base_link"/>
-    <arg name="sensor_prefix" value="/world/$(arg world)/model/$(arg robot_name)/link/$(arg link_name)/sensor"/>
+    <arg name="sensor_prefix" value="/world/map/model/$(arg robot_name)/link/$(arg link_name)/sensor"/>
 
     <node
         pkg="ros_ign_bridge"
@@ -31,12 +31,19 @@
     </node>
 
     <group ns="$(arg robot_name)">
-        <node
+        <!-- <node
             pkg="ros_ign_bridge"
             type="parameter_bridge"
             name="ros_ign_bridge_twist"
-            args="/model/$(arg robot_name)/cmd_vel@geometry_msgs/Twist@gz.msgs.Twist">
-            <remap from="/model/$(arg robot_name)/cmd_vel" to="cmd_vel"/>
+            args="/model/$(arg robot_name)/cmd@geometry_msgs/Twist@gz.msgs.Twist">
+            <remap from="/model/$(arg robot_name)/cmd" to="cmd"/>
+        </node> -->
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_cmd"
+            args="/model/$(arg robot_name)/cmd@geometry_msgs/Quaternion@gz.msgs.Quaternion">
+            <remap from="/model/$(arg robot_name)/cmd" to="cmd"/>
         </node>
 
         <node

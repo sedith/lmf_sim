@@ -31,7 +31,7 @@
 
     <!-- spawn robot -->
     <node pkg="ros_ign_gazebo" type="create" name="spawn_model" args="
-        -world $(arg world)
+        -world map
         -name $(arg robot_name)
         -allow_renaming $(arg allow_renaming)
         -file $(find lmf_sim)/resources/robots/$(arg robot_type)/model.sdf
@@ -49,5 +49,5 @@
     </include>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher2"
-    args="0 0 0 0 0 0 1.0 /$(arg world) /$(arg robot_name)/odom" />
+    args="0 0 0 0 0 0 1.0 /map /$(arg robot_name)/odom" />
 </launch>

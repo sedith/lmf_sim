@@ -648,11 +648,11 @@
         <motorType>velocity</motorType>
     </plugin>
 
-    <plugin filename="libgz-sim-multicopter-control-system.so" name="gz::sim::systems::MulticopterVelocityControl">
+    <!-- <plugin filename="libgz-sim-multicopter-control-system.so" name="gz::sim::systems::MulticopterVelocityControl"> -->
     <!-- <plugin filename="libgz-sim-multicopter-position-control-system.so" name="gz::sim::systems::MulticopterPositionControl"> -->
+    <plugin filename="libgz-sim-multicopter-attitude-control-system.so" name="gz::sim::systems::MulticopterAttitudeControl">
         <robotNamespace>model/rmf_owl</robotNamespace>
-        <commandSubTopic>cmd_vel</commandSubTopic>
-        <commandSubTopic>cmd_pos</commandSubTopic>
+        <commandSubTopic>cmd</commandSubTopic>
         <motorControlPubTopic>command/motor_speed</motorControlPubTopic>
         <enableSubTopic>enable</enableSubTopic>
         <comLinkName>base_link</comLinkName>
