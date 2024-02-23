@@ -60,7 +60,7 @@
             type="parameter_bridge"
             name="ros_ign_bridge_camera"
             args="$(arg sensor_prefix)/depth_cam/camera_info@sensor_msgs/CameraInfo[gz.msgs.CameraInfo">
-            <remap from="$(arg sensor_prefix)/depth_cam/camera_info" to="cam/info"/>
+            <remap from="$(arg sensor_prefix)/depth_cam/camera_info" to="cam/camera_info"/>
        </node>
 
        <node
