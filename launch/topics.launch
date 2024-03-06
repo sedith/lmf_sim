@@ -31,20 +31,20 @@
     </node>
 
     <group ns="$(arg robot_name)">
-        <!-- <node
+        <node
             pkg="ros_ign_bridge"
             type="parameter_bridge"
             name="ros_ign_bridge_twist"
             args="/model/$(arg robot_name)/cmd@geometry_msgs/Twist@gz.msgs.Twist">
             <remap from="/model/$(arg robot_name)/cmd" to="cmd"/>
-        </node> -->
-        <node
+        </node>
+        <!-- <node
             pkg="ros_ign_bridge"
             type="parameter_bridge"
             name="ros_ign_bridge_cmd"
             args="/model/$(arg robot_name)/cmd@geometry_msgs/Quaternion@gz.msgs.Quaternion">
             <remap from="/model/$(arg robot_name)/cmd" to="cmd"/>
-        </node>
+        </node> -->
 
         <node
             pkg="ros_ign_bridge"
