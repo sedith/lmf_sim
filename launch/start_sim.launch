@@ -1,6 +1,11 @@
 <launch>
     <param name="use_sim_time" value="true" />
 
+    <!-- record parameters -->
+    <arg name="record" default="true"/>
+    <arg name="record_path" default="/home/sedith/work/colpred_ws/bags"/>
+    <arg name="bag_prefix" default=""/>
+
     <!-- world parameters -->
     <arg name="resource_dir" default="$(find lmf_sim)/resources/worlds" />
     <arg name="verbosity" default="4"/>
@@ -50,4 +55,9 @@
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher2"
     args="0 0 0 0 0 0 1.0 /map /$(arg robot_name)/odom" />
+
+    <include if="$(arg record)" file="$(find lmf_sim)/launch/bag_rec.launch" >
+        <arg name="record_path" value="$(arg record_path)"/>
+        <arg name="bag_prefix" value="$(arg bag_prefix)"/>
+    </include>
 </launch>
