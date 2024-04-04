@@ -9,6 +9,7 @@
     <!-- world parameters -->
     <arg name="resource_dir" default="$(find lmf_sim)/resources/worlds" />
     <arg name="verbosity" default="4"/>
+    <arg name="version" default="7.4.0"/>
     <arg name="world" default="empty"/>
 
     <!-- robot parameters -->
@@ -26,7 +27,7 @@
     <include file="$(find ros_ign_gazebo)/launch/ign_gazebo.launch">
         <env name="GZ_SIM_MODEL_PATH" value="$(arg resource_dir)" />
         <env name="GZ_SIM_RESOURCE_PATH" value="$(arg resource_dir)" />
-        <arg name="ign_args" value="-r -v $(arg verbosity) $(arg world).sdf"/>
+        <arg name="ign_args" value="--force-version $(arg version) -r -v $(arg verbosity) $(arg world).sdf"/>
     </include>
 
     <node pkg="ros_ign_bridge" type="parameter_bridge"
