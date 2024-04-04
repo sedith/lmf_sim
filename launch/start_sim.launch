@@ -9,7 +9,7 @@
     <!-- world parameters -->
     <arg name="resource_dir" default="$(find lmf_sim)/resources/worlds" />
     <arg name="verbosity" default="4"/>
-    <arg name="world" default="empty_world"/>
+    <arg name="world" default="empty"/>
 
     <!-- robot parameters -->
     <arg name="robot_name" default="rmf_owl"/>
