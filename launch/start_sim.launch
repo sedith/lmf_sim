@@ -15,6 +15,7 @@
     <!-- robot parameters -->
     <arg name="robot_name" default="rmf_owl"/>
     <arg name="robot_type" default="rmf_owl"/>
+    <arg name="control_mode" default="acc"/>
     <arg name="allow_renaming" default="true" />
     <arg name="x" default="0" />
     <arg name="y" default="0" />
@@ -52,6 +53,7 @@
         <arg name="world" value="$(arg world)" />
         <arg name="robot_name" value="$(arg robot_name)" />
         <arg name="robot_type" value="$(arg robot_type)" />
+        <arg name="control_mode" value="$(arg control_mode)"/>
     </include>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher2"

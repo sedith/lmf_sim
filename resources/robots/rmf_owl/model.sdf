@@ -650,20 +650,70 @@
 
     <!-- <plugin filename="libgz-sim-multicopter-control-system.so" name="gz::sim::systems::MulticopterVelocityControl"> -->
     <!-- <plugin filename="libgz-sim-multicopter-position-control-system.so" name="gz::sim::systems::MulticopterPositionControl"> -->
-    <!-- <plugin filename="libgz-sim-multicopter-attitude-control-system.so" name="gz::sim::systems::MulticopterAttitudeControl"> -->
-    <plugin filename="libgz-sim-multicopter-acceleration-control-system.so" name="gz::sim::systems::MulticopterAccelerationControl">
+    <plugin filename="libgz-sim-multicopter-attitude-control-system.so" name="gz::sim::systems::MulticopterAttitudeControl">
         <robotNamespace>model/rmf_owl</robotNamespace>
-        <commandSubTopic>cmd</commandSubTopic>
+        <commandSubTopic>cmd_att</commandSubTopic>
         <motorControlPubTopic>command/motor_speed</motorControlPubTopic>
         <enableSubTopic>enable</enableSubTopic>
         <comLinkName>base_link</comLinkName>
         <positionGain>6 6 10</positionGain>
         <velocityGain>6 6 10</velocityGain>
         <attitudeGain>4 4 2</attitudeGain>
-        <angularRateGain>0.7 0.7 0.7</angularRateGain>
-        <maximumLinearAcceleration>4 4 5</maximumLinearAcceleration>
-        <maximumLinearVelocity>3 3 1.8</maximumLinearVelocity>
-        <maximumAngularVelocity>3 3 1.9</maximumAngularVelocity>
+        <angularRateGain>0.7 0.7 0.2</angularRateGain>
+        <maximumLinearVelocity>5 5 5</maximumLinearVelocity>
+        <maximumLinearAcceleration>3 3 3</maximumLinearAcceleration>
+        <maximumAngularVelocity>5 5 3</maximumAngularVelocity>
+        <linearVelocityNoiseMean>0 0 0</linearVelocityNoiseMean>
+        <!-- linearVelocityNoiseStdDev based on error values reported in the paper Shen et. al., -->
+        <!-- Vision-Based State Estimation and Trajectory Control Towards High-Speed Flight with a Quadrotor -->
+        <!-- http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.490.7958&rep=rep1&type=pdf -->
+        <linearVelocityNoiseStdDev>0.1105 0.1261 0.0947</linearVelocityNoiseStdDev>
+        <angularVelocityNoiseMean>0 0 0</angularVelocityNoiseMean>
+        <!-- angularVelocityNoiseStdDev values based on ADIS16448's Rate Noise Density with a sample  -->
+        <!-- time of 0.004 ms. -->
+        <angularVelocityNoiseStdDev>0.004 0.004 0.004</angularVelocityNoiseStdDev>
+
+        <rotorConfiguration>
+            <rotor>
+                <jointName>rotor_0_joint</jointName>
+                <forceConstant>0.02246</forceConstant>
+                <momentConstant>1.6754e-2</momentConstant>
+                <direction>1</direction>
+            </rotor>
+            <rotor>
+                <jointName>rotor_1_joint</jointName>
+                <forceConstant>0.02246</forceConstant>
+                <momentConstant>1.6754e-2</momentConstant>
+                <direction>1</direction>
+            </rotor>
+            <rotor>
+                <jointName>rotor_2_joint</jointName>
+                <forceConstant>0.02246</forceConstant>
+                <momentConstant>1.6754e-2</momentConstant>
+                <direction>-1</direction>
+            </rotor>
+            <rotor>
+                <jointName>rotor_3_joint</jointName>
+                <forceConstant>0.02246</forceConstant>
+                <momentConstant>1.6754e-2</momentConstant>
+                <direction>-1</direction>
+            </rotor>
+        </rotorConfiguration>
+    </plugin>
+
+    <plugin filename="libgz-sim-multicopter-acceleration-control-system.so" name="gz::sim::systems::MulticopterAccelerationControl">
+        <robotNamespace>model/rmf_owl</robotNamespace>
+        <commandSubTopic>cmd_acc</commandSubTopic>
+        <motorControlPubTopic>command/motor_speed</motorControlPubTopic>
+        <enableSubTopic>enable</enableSubTopic>
+        <comLinkName>base_link</comLinkName>
+        <positionGain>6 6 10</positionGain>
+        <velocityGain>6 6 10</velocityGain>
+        <attitudeGain>4 4 2</attitudeGain>
+        <angularRateGain>0.7 0.7 0.2</angularRateGain>
+        <maximumLinearVelocity>5 5 5</maximumLinearVelocity>
+        <maximumLinearAcceleration>3 3 3</maximumLinearAcceleration>
+        <maximumAngularVelocity>5 5 3</maximumAngularVelocity>
         <linearVelocityNoiseMean>0 0 0</linearVelocityNoiseMean>
         <!-- linearVelocityNoiseStdDev based on error values reported in the paper Shen et. al., -->
         <!-- Vision-Based State Estimation and Trajectory Control Towards High-Speed Flight with a Quadrotor -->
