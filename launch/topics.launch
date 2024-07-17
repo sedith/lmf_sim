@@ -32,7 +32,7 @@
     </node>
 
     <group ns="$(arg robot_name)">
-        <group if="$(eval arg('control_mode') =='acc')">
+        <group if="$(eval arg('control_mode') == 'acc')">
             <node
                 pkg="ros_ign_bridge"
                 type="parameter_bridge"
@@ -41,7 +41,7 @@
                 <remap from="/model/$(arg robot_name)/cmd_acc" to="cmd"/>
             </node>
         </group>
-        <group if="$(eval arg('control_mode') =='att')">
+        <group if="$(eval arg('control_mode') == 'att')">
             <node
                 pkg="ros_ign_bridge"
                 type="parameter_bridge"
