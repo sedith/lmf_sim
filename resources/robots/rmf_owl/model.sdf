@@ -150,27 +150,9 @@
         <sensor name="rgb_cam" type="camera">
             <pose>0.180 0 -0.025 0 0 0</pose>
             <always_on>1</always_on>
-            <update_rate>30</update_rate>
-            <visualize>true</visualize>
+            <update_rate>10</update_rate>
             <camera name="rgb_cam">
-                <horizontal_fov>1.57</horizontal_fov>
-                <lens>
-                    <intrinsics>
-                        <fx>252.91646</fx>
-                        <fy>252.91646</fy>
-                        <cx>240.0</cx>
-                        <cy>135.0</cy>
-                        <s>1</s>
-                    </intrinsics>
-                </lens>
-                <distortion>
-                    <k1>0.0</k1>
-                    <k2>0.0</k2>
-                    <k3>0.0</k3>
-                    <p1>0.0</p1>
-                    <p2>0.0</p2>
-                    <center>0.5 0.5</center>
-                </distortion>
+                <horizontal_fov>1.52</horizontal_fov>
                 <image>
                     <width>480</width>
                     <height>270</height>
@@ -189,27 +171,11 @@
         </sensor>
 
         <sensor name="depth_cam" type="depth_camera">
-            <update_rate>10</update_rate>
             <pose>0.180 0 -0.025 0 0 0</pose>
+            <always_on>1</always_on>
+            <update_rate>30</update_rate>
             <camera name="depth_cam">
-                <horizontal_fov>1.57</horizontal_fov>
-                <lens>
-                    <intrinsics>
-                        <fx>252.91646</fx>
-                        <fy>252.91646</fy>
-                        <cx>240.0</cx>
-                        <cy>135.0</cy>
-                        <s>1</s>
-                    </intrinsics>
-                </lens>
-                <distortion>
-                    <k1>0.0</k1>
-                    <k2>0.0</k2>
-                    <k3>0.0</k3>
-                    <p1>0.0</p1>
-                    <p2>0.0</p2>
-                    <center>0.5 0.5</center>
-                </distortion>
+                <horizontal_fov>1.52</horizontal_fov>
                 <image>
                     <width>480</width>
                     <height>270</height>
@@ -657,12 +623,12 @@
         <motorControlPubTopic>command/motor_speed</motorControlPubTopic>
         <enableSubTopic>enable</enableSubTopic>
         <comLinkName>base_link</comLinkName>
-        <positionGain>6 6 10</positionGain>
-        <velocityGain>6 6 10</velocityGain>
-        <attitudeGain>4 4 2</attitudeGain>
-        <angularRateGain>0.7 0.7 0.2</angularRateGain>
+        <positionGain>0 0 0</positionGain>
+        <velocityGain>0 0 0</velocityGain>
+        <attitudeGain>10 10 15</attitudeGain>
+        <angularRateGain>1 1 1.5</angularRateGain>
         <maximumLinearVelocity>5 5 5</maximumLinearVelocity>
-        <maximumLinearAcceleration>3 3 3</maximumLinearAcceleration>
+        <maximumLinearAcceleration>5 5 5</maximumLinearAcceleration>
         <maximumAngularVelocity>5 5 3</maximumAngularVelocity>
         <linearVelocityNoiseMean>0 0 0</linearVelocityNoiseMean>
         <!-- linearVelocityNoiseStdDev based on error values reported in the paper Shen et. al., -->
@@ -708,12 +674,12 @@
         <motorControlPubTopic>command/motor_speed</motorControlPubTopic>
         <enableSubTopic>enable</enableSubTopic>
         <comLinkName>base_link</comLinkName>
-        <positionGain>6 6 10</positionGain>
-        <velocityGain>6 6 10</velocityGain>
-        <attitudeGain>4 4 2</attitudeGain>
-        <angularRateGain>0.7 0.7 0.2</angularRateGain>
+        <positionGain>0 0 0</positionGain>
+        <velocityGain>0 0 0</velocityGain>
+        <attitudeGain>30 30 30</attitudeGain>
+        <angularRateGain>3 3 3</angularRateGain>
         <maximumLinearVelocity>5 5 5</maximumLinearVelocity>
-        <maximumLinearAcceleration>3 3 3</maximumLinearAcceleration>
+        <maximumLinearAcceleration>5 5 5</maximumLinearAcceleration>
         <maximumAngularVelocity>5 5 3</maximumAngularVelocity>
         <linearVelocityNoiseMean>0 0 0</linearVelocityNoiseMean>
         <!-- linearVelocityNoiseStdDev based on error values reported in the paper Shen et. al., -->
