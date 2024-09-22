@@ -67,4 +67,10 @@
         <arg name="record_path" value="$(arg record_path)"/>
         <arg name="bag_prefix" value="$(arg bag_prefix)"/>
     </include>
+
+    <!-- joystick -->
+    <include file="$(find joystick_remapper)/launch/joystick_remapper.launch"/>
+
+    <!-- lidar range image -->
+    <include file="$(find pc_to_range)/launch/pc_to_range.launch"/>
 </launch>
