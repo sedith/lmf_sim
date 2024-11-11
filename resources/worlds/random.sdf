@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+<world name="map">
+    <physics name="1ms" type="ignored">
+        <max_step_size>0.001</max_step_size>
+        <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="libgz-sim-physics-system.so" name="gz::sim::systems::Physics" />
+    <plugin filename="libgz-sim-sensors-system.so" name="gz::sim::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="libgz-sim-scene-broadcaster-system.so" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="libgz-sim-user-commands-system.so" name="gz::sim::systems::UserCommands" />
+
+
+    <light type="directional" name="sun">
+        <cast_shadows>true</cast_shadows>
+        <pose>0 0 10 0 0 0</pose>
+        <diffuse>0.8 0.8 0.8 1</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+        <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+        </attenuation>
+        <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+        <static>true</static>
+        <link name="link">
+            <pose>0 0 -0.05 0 0 0</pose>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>50 50 0.1</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>20 20 0.1</size>
+                    </box>
+                </geometry>
+                <material>
+                    <ambient>0.8 0.8 0.8 1</ambient>
+                    <diffuse>0.8 0.8 0.8 1</diffuse>
+                    <specular>0.8 0.8 0.8 1</specular>
+                </material>
+            </visual>
+        </link>
+    </model>
+
+
+
+    <include>
+        <static>true</static>
+        <name>o1</name>
+        <pose>-3.607289013220929 0.17928380219417672 2.0604496818179854 2.3016122762900704 -0.6536483777772495 1.6741390360471096</pose>
+        <uri>../environment_assets/objects_large/cube_1m.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o2</name>
+        <pose>4.489186465384627 -0.8344081084792743 0.6641303096610978 0.6611074247787845 0.9078061340290824 2.2149004969711967</pose>
+        <uri>../environment_assets/objects_large/cube_50cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o3</name>
+        <pose>1.432997751758914 -0.48010209807313053 0.5453017050718713 1.0258520335295467 -0.6897671186535128 0.8809234053006234</pose>
+        <uri>../environment_assets/objects_large/cuboidal_rod_1m.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o4</name>
+        <pose>0.39969969290686613 -2.321780825096851 0.5571125304913381 3.1112718769479537 1.114702543924241 1.0428100113280978</pose>
+        <uri>../environment_assets/objects_large/cuboidal_rod_60cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o5</name>
+        <pose>-0.6089993274241934 1.1670418563869775 1.1739785719566889 -0.6718324597606662 0.01531382805695869 0.9926121069249634</pose>
+        <uri>../environment_assets/objects_large/cylinder_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o6</name>
+        <pose>-3.043826714633026 0.36825567994480135 2.4989815833961844 1.6343839744677506 -0.19197798864879756 2.5659842878789068</pose>
+        <uri>../environment_assets/objects_large/cylinder_50cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o7</name>
+        <pose>3.624690219782906 -2.606032052020642 0.08714538391162185 1.8325368603027554 -1.3568927539422375 -1.1868282274096646</pose>
+        <uri>../environment_assets/objects_large/cube_1m.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o8</name>
+        <pose>4.262970352631738 0.9230670326930364 0.4793268568760476 2.522285575805033 -0.7653239684429392 -2.00053170308141</pose>
+        <uri>../environment_assets/objects_large/cube_50cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o9</name>
+        <pose>-2.5240455597114297 1.682378216581732 0.4925222188606877 -3.0385327022999804 0.9177950270341655 2.1939682106378147</pose>
+        <uri>../environment_assets/objects_large/cuboidal_rod_60cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o10</name>
+        <pose>-3.780929657336014 -0.7445653157373142 1.7009244676237611 -0.49977410067939143 0.48043716856859 0.6893018032396263</pose>
+        <uri>../environment_assets/objects_large/cylinder_25cm.urdf</uri>
+    </include>
+
+    <include>
+        <static>true</static>
+        <name>o11</name>
+        <pose>-2.7894044973302226 -0.20796593630907445 0.7665658607859938 -1.6246492000893256 -1.288705207531205 2.2988617600683536</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o12</name>
+        <pose>-3.9107957145126058 1.4769056821143893 1.5508226808751577 -0.6056571336556265 1.4047693663500032 0.25728009819123</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o13</name>
+        <pose>1.5653382172218109 0.7877935767894355 1.3500584408320608 -1.4620131666574907 1.5312371136329959 -3.056663615998351</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o14</name>
+        <pose>-3.895993256986423 0.038915896022233554 1.6316543629166291 1.1597087300414035 0.7274637698081143 1.4136504890025199</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o15</name>
+        <pose>0.744140133158834 2.3581368145350607 2.918841152516101 -2.759679139220186 -0.0645162886999735 -1.9562985997509759</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o16</name>
+        <pose>2.9496945143697415 2.408077265250288 1.7712460242640464 0.7024270903373124 -0.4731343954657061 1.6141310924766525</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o17</name>
+        <pose>-4.2993954301376425 -1.8920894150007357 1.5856831189796303 -2.0605508344007695 -0.7435542774573721 1.9189111120746265</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o18</name>
+        <pose>-0.45166457621934253 1.5583753992904619 2.3081089165266384 0.10303936714006712 0.8599682922742966 2.0503244158164238</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o19</name>
+        <pose>-2.2461742338294712 0.8718255654108278 0.4736971616812281 0.967034591151287 1.0594175328670783 1.9429319834098786</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o20</name>
+        <pose>0.093112140050847 1.882791460244345 1.702533302732335 1.0446571544418637 -0.7161580569799724 0.3748354353824985</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o21</name>
+        <pose>2.7200635419253016 -0.8083705223665767 0.736129371784241 -0.9348601683160034 0.6950852893938584 -1.879798638689529</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o22</name>
+        <pose>-2.834204184892717 2.484924407219026 1.6846612132687175 1.9951460668431586 -1.2445510986779131 -0.7457062634244402</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o23</name>
+        <pose>-0.23638610906963287 0.6570365050685676 2.1166357181129896 -1.1669557446623209 -0.8827937349892682 -2.3990313957500096</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o24</name>
+        <pose>-1.061151283245867 -1.5272902385604137 0.7816724877236937 -0.8195193510189123 0.9295967371450016 0.644234398696272</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o25</name>
+        <pose>-4.596602547860997 -1.1113227820000746 2.5393983079074953 -0.21568275265407832 1.030337107285487 2.145013068466228</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o26</name>
+        <pose>2.3546587224634807 -2.8236195490128537 2.7603544548520755 -1.998850185325694 -0.4919349821287564 -3.012883273666984</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o27</name>
+        <pose>3.1802762549291756 2.7908342102543173 0.5842233796815484 -0.19687692551802405 -0.35389794808903874 -2.6938965263173027</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o28</name>
+        <pose>3.0307777255158186 2.6833211990290717 2.582715525937748 1.0384004170463923 0.3894529144482046 0.20121410209020185</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o29</name>
+        <pose>0.2557958677190184 -2.703772564103769 0.8885452594542131 2.6193658431563858 1.2227294790694816 -1.4856494630014887</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o30</name>
+        <pose>4.626457950110559 1.5706606542867512 1.3057211234046089 0.26780672880112677 -0.2908393329398855 1.7527690080417164</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o31</name>
+        <pose>-1.0554389114870135 2.6289444279014624 1.6894400936962959 -2.8217890641993684 -0.1491421125437491 -1.19713960918413</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o32</name>
+        <pose>2.7885176144886454 2.2713232906073824 0.3586537428022093 -0.3517858030124388 -1.1957483163377003 -1.21627662092184</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o33</name>
+        <pose>-0.21067549882276282 2.0524600530402406 2.272989344342338 -1.6481936296906008 1.1671430460572734 -2.8528172267919425</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o34</name>
+        <pose>1.2585961277002822 2.1188619562907407 2.172783550635724 0.9518275532434508 -1.0090595355608385 -2.737058598107679</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o35</name>
+        <pose>-4.599390529191389 1.645211080043481 1.3713044667318104 0.6010520920484774 -0.09305428253179837 -0.15133894051763086</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o36</name>
+        <pose>-2.208042327586819 -0.9842391039129099 1.7061732776923773 -1.617014937607567 -0.6520475013285227 2.7951018491623305</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o37</name>
+        <pose>-2.090444097910739 -2.375889334910598 2.1844497355292214 -1.1041472363064528 1.0825289149807267 -1.2094595672530415</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o38</name>
+        <pose>-2.8862338089313355 2.704376772687276 1.3390765570323215 -1.1555898207063529 -0.15339021730870073 -2.7338280666202612</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o39</name>
+        <pose>1.2688554852164966 1.4722775192970525 0.11551017530184571 0.06134979743373492 -1.2442444884894246 2.0620412596600604</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o40</name>
+        <pose>3.7680290506550094 1.6527106761098107 1.351716157167652 2.7653746315896957 -0.46796130175891415 1.8654414346966082</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o41</name>
+        <pose>-2.7706753856257826 -2.3850556297452554 2.913075245953909 2.831254988028183 -0.03467490708951959 0.9723214490016456</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o42</name>
+        <pose>-4.034722164846959 -1.6767631326272092 0.7763952668132282 -0.9897038427975224 -1.509618690964497 1.4766782366721518</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o43</name>
+        <pose>-4.737732726429671 -2.3911016260751614 0.42444734192468436 -1.7711935195840838 -0.7125800461737125 2.5106203464500725</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o44</name>
+        <pose>-3.235577354218475 1.1461024395030694 1.2462128926631557 -1.6038224891732298 -0.12354301761803588 -2.3342755350725612</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o45</name>
+        <pose>-0.4797204083839457 1.220443782223552 2.799982267881167 -1.4895708983030262 -0.3509579555737996 -0.8691806144888083</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o46</name>
+        <pose>-2.53750175330278 -2.265720027279153 0.9234326613666352 0.794099206311929 -1.4301872687425075 0.8442506495852258</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o47</name>
+        <pose>2.684874504688599 -0.07859634789919223 2.1995390685526877 0.19755334236888178 1.3016372802794849 1.679607279451755</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o48</name>
+        <pose>-1.3616388311966476 -2.828646273988954 1.78161479971795 0.031039594830081008 1.5560590273691468 -2.0870135834745875</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o49</name>
+        <pose>1.0036894950516544 0.44785634963141874 0.06846483821234761 -2.263253055513081 1.025081527704924 -2.268906704979178</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o50</name>
+        <pose>-4.609119198740785 1.9867947739160332 0.9703007837747425 0.2951750028436737 0.3550586391594419 -2.802345908799684</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o51</name>
+        <pose>2.0814152593870228 0.48706960279936373 1.3624715947613013 -0.45422423390642486 -0.6592236707858652 2.383599572586153</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o52</name>
+        <pose>0.24944502626229603 2.011946502806243 2.481186051363962 1.222942531599311 1.059078701938859 1.9036343880579043</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o53</name>
+        <pose>3.374103104994795 -0.5856049841738318 0.3080845614976935 1.7295674253059055 1.2771087439570175 -0.2349261080297631</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o54</name>
+        <pose>4.951324994583715 2.9180761999562623 0.35893033417087794 -0.15322400583815954 -1.2676152471872362 2.0176283758510225</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o55</name>
+        <pose>3.275689419377766 2.131870380524541 2.9983868850066173 -2.548078916220531 -0.19349577653956862 -1.0399417274532152</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o56</name>
+        <pose>-1.9671417372027946 -1.9734591385067721 0.7990077127664681 2.532185794696587 -0.3932976003326296 -2.947458760847039</pose>
+        <uri>../environment_assets/objects_medium/cube_25cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o57</name>
+        <pose>4.412221127251767 1.849270172760134 2.9382496938019944 -2.159763868057141 -0.5914497555163345 2.632094459038763</pose>
+        <uri>../environment_assets/objects_medium/cube_30cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o58</name>
+        <pose>-1.4660963907626057 -2.6418571807568183 2.0241391696928273 1.4957273899750847 -0.8512837306860441 1.8654072421281338</pose>
+        <uri>../environment_assets/objects_medium/cube_40cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o59</name>
+        <pose>-1.6205344593817261 0.10791028173193595 2.6898654706004774 1.8403561088867084 -1.4284399884900914 -0.22281548783645988</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_15cm.urdf</uri>
+    </include>
+    <include>
+        <static>true</static>
+        <name>o60</name>
+        <pose>-0.9567376071509459 -0.756809872435972 1.2970472206586852 3.019579605277798 1.4971216819054902 -0.732340385074933</pose>
+        <uri>../environment_assets/objects_medium/cuboidal_rod_30cm.urdf</uri>
+    </include>
+</world>
+</sdf>
