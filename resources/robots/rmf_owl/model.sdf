@@ -624,7 +624,7 @@
         <enableSubTopic>enable</enableSubTopic>
         <comLinkName>base_link</comLinkName>
         <positionGain>0 0 0</positionGain>
-        <velocityGain>0 0 0</velocityGain>
+        <velocityGain>10 10 10</velocityGain>
         <attitudeGain>15 15 2</attitudeGain>
         <angularRateGain>2 2 0.2</angularRateGain>
         <maximumLinearVelocity>5 5 5</maximumLinearVelocity>

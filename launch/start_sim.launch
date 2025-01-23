@@ -74,4 +74,7 @@
 
     <!-- lidar range image -->
     <include file="$(find pc_to_range)/launch/pc_to_range.launch"/>
+
+    <!-- rviz -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find sdf_nmpc_ros)/rviz/nmpc_sim.rviz" />
 </launch>
