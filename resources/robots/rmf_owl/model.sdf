@@ -174,7 +174,7 @@
         <sensor name="depth_cam" type="depth_camera">
             <pose>0.180 0 -0.025 0 0 0</pose>
             <always_on>1</always_on>
-            <update_rate>5</update_rate>
+            <update_rate>20</update_rate>
             <camera name="depth_cam">
                 <horizontal_fov>1.52</horizontal_fov>
                 <image>
@@ -207,7 +207,7 @@
         <sensor name="lidar" type="gpu_ray">
             <!-- The laser is patterned off of the X1 medium range lidar. -->
             <pose>0 0 0.05 0 0 0</pose>
-            <update_rate>10</update_rate>
+            <update_rate>20</update_rate>
             <visualize>true</visualize>
             <always_on>true</always_on>
             <lidar>
