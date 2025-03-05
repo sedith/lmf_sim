@@ -1,25 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<robot name="pillar">
+<robot name="box">
     <link name="base_link">
         <inertial>
-          <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
-          <mass value="1.0"/>
-          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 -0.0 0.0"/>
+                <mass value="1.0"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
         </inertial>
         <visual name="base_link_visual">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <cylinder radius="0.2" length="8"/>
+                <box size="0.07 0.07 8"/>
             </geometry>
             <material name="base_link_color">
               <color rgba="0.3 0.3 0.3 1"/>
             </material>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
         </visual>
         <collision name="base_link_collision">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <cylinder radius="0.2" length="8"/>
+                <box size="0.07 0.07 8"/>
             </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
     </link>
 </robot>

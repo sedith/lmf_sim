@@ -20,7 +20,7 @@
     <!-- robot parameters -->
     <arg name="robot_name" default="rmf_owl"/>
     <arg name="robot_type" default="rmf_owl"/>
-    <arg name="control_mode" default="acc"/>
+    <!-- <arg name="control_mode" default="acc"/> -->
     <arg name="allow_renaming" default="true" />
     <arg name="x" default="0" />
     <arg name="y" default="0" />
@@ -45,7 +45,6 @@
     <node pkg="ros_ign_gazebo" type="create" name="spawn_model" args="
         -world map
         -name $(arg robot_name)
-        -allow_renaming $(arg allow_renaming)
         -file $(find lmf_sim)/resources/robots/$(arg robot_type)/model.sdf
         -x $(arg x) -y $(arg y) -z $(arg z)
         -R $(arg R) -P $(arg P) -Y $(arg Y)
@@ -58,7 +57,7 @@
         <arg name="world" value="$(arg world)" />
         <arg name="robot_name" value="$(arg robot_name)" />
         <arg name="robot_type" value="$(arg robot_type)" />
-        <arg name="control_mode" value="$(arg control_mode)"/>
+        <!-- <arg name="control_mode" value="$(arg control_mode)"/> -->
     </include>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher2"

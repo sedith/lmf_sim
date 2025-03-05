@@ -10,6 +10,7 @@
     <plugin filename="libgz-sim-sensors-system.so" name="gz::sim::systems::Sensors">
         <render_engine>ogre2</render_engine>
     </plugin>
+    <plugin filename="libgz-sim-contact-system" name="gz::sim::systems::Contact" />
     <plugin filename="libgz-sim-scene-broadcaster-system.so" name="gz::sim::systems::SceneBroadcaster"></plugin>
     <plugin filename="libgz-sim-user-commands-system.so" name="gz::sim::systems::UserCommands"></plugin>
 
@@ -35,7 +36,7 @@
             <collision name="collision">
                 <geometry>
                     <box>
-                        <size>50 50 0.1</size>
+                        <size>20 20 0.1</size>
                     </box>
                 </geometry>
             </collision>
@@ -54,7 +55,11 @@
         </link>
     </model>
 
-
+    <!-- <include>
+        <name>rmf_owl</name>
+        <pose>0 0 0.5 0 0 0</pose>
+        <uri>/home/sedith/work/colpred_ws/sim_ws/src/lmf_sim//resources/robots/rmf_owl/model.sdf</uri>
+    </include> -->
 
     <!-- obstacles -->
 </world>

@@ -32,24 +32,24 @@
     </node>
 
     <group ns="$(arg robot_name)">
-        <group if="$(eval arg('control_mode') == 'acc')">
+        <!-- <group if="$(eval arg('control_mode') == 'acc')"> -->
             <node
                 pkg="ros_ign_bridge"
                 type="parameter_bridge"
                 name="ros_ign_bridge_twist"
-                args="/model/$(arg robot_name)/cmd_acc@geometry_msgs/Twist@gz.msgs.Twist">
-                <remap from="/model/$(arg robot_name)/cmd_acc" to="cmd"/>
+                args="/model/$(arg robot_name)/cmd/acc@geometry_msgs/Twist@gz.msgs.Twist">
+                <remap from="/model/$(arg robot_name)/cmd/acc" to="cmd/acc"/>
             </node>
-        </group>
-        <group if="$(eval arg('control_mode') == 'att')">
+        <!-- </group>
+        <group if="$(eval arg('control_mode') == 'att')"> -->
             <node
                 pkg="ros_ign_bridge"
                 type="parameter_bridge"
                 name="ros_ign_bridge_cmd"
-                args="/model/$(arg robot_name)/cmd_att@geometry_msgs/Quaternion@gz.msgs.Quaternion">
-                <remap from="/model/$(arg robot_name)/cmd_att" to="cmd"/>
+                args="/model/$(arg robot_name)/cmd/att@geometry_msgs/Quaternion@gz.msgs.Quaternion">
+                <remap from="/model/$(arg robot_name)/cmd/att" to="cmd/att"/>
             </node>
-        </group>
+        <!-- </group> -->
 
         <node
             pkg="ros_ign_bridge"
@@ -63,7 +63,7 @@
         <node
             pkg="ros_ign_bridge"
             type="parameter_bridge"
-            name="ros_ign_bridge_camera"
+            name="ros_ign_bridge_depth_camera_info"
             args="$(arg sensor_prefix)/depth_cam/camera_info@sensor_msgs/CameraInfo[gz.msgs.CameraInfo">
             <remap from="$(arg sensor_prefix)/depth_cam/camera_info" to="cam/camera_info"/>
        </node>
@@ -71,7 +71,7 @@
        <node
             pkg="ros_ign_image"
             type="image_bridge"
-            name="ros_ign_image_camera"
+            name="ros_ign_bridge_rgb_camera_image"
             args="$(arg sensor_prefix)/rgb_cam/image">
             <remap from="$(arg sensor_prefix)/rgb_cam/image" to="cam/rgb"/>
        </node>
@@ -79,7 +79,7 @@
         <node
             pkg="ros_ign_image"
             type="image_bridge"
-            name="ros_ign_depth_cam"
+            name="ros_ign_bridge_depth_camera_image"
             args="$(arg sensor_prefix)/depth_cam/depth_image">
             <remap from="$(arg sensor_prefix)/depth_cam/depth_image" to="cam/depth"/>
         </node>
@@ -87,7 +87,7 @@
         <node
             pkg="ros_ign_bridge"
             type="parameter_bridge"
-            name="ros_ign_depth_cam_points"
+            name="ros_ign_bridge_depth_camera_points"
             args="$(arg sensor_prefix)/depth_cam/depth_image/points@sensor_msgs/PointCloud2[gz.msgs.PointCloudPacked">
             <remap from="$(arg sensor_prefix)/depth_cam/depth_image/points" to="cam/pc"/>
         </node>
@@ -97,19 +97,19 @@
         <node
             pkg="ros_ign_bridge"
             type="parameter_bridge"
-            name="ros_ign_bridge_lidar3d"
+            name="ros_ign_bridge_lidar"
             args="$(arg sensor_prefix)/lidar/scan/points@sensor_msgs/PointCloud2[gz.msgs.PointCloudPacked">
             <remap from="$(arg sensor_prefix)/lidar/scan/points" to="lidar/points"/>
         </node>
 
 
         <!-- IMU -->
-        <node
+        <!-- <node
             pkg="ros_ign_bridge"
             type="parameter_bridge"
             name="ros_ign_bridge_imu"
             args="$(arg sensor_prefix)/imu_sensor/imu@sensor_msgs/Imu[gz.msgs.IMU">
             <remap from="$(arg sensor_prefix)/imu_sensor/imu" to="imu/data"/>
-        </node>
+        </node> -->
     </group>
 </launch>

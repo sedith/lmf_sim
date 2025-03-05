@@ -5,22 +5,8 @@
 
     <node pkg="rosbag" type="record" name="recorder" args="--split --size=1024 -o $(arg record_path)/$(arg bag_prefix)
         /clock
-        /nmpc/0lvlset
-        /nmpc/cpt
-        /nmpc/cmd_stamped
-        /nmpc/traj_horizon
-        /nmpc/vae_reconst
-        /nmpc/waypoint
-        /rmf_owl/cam/camera_info
-        /rmf_owl/cam/depth
-        /rmf_owl/cam/pc
-        /rmf_owl/cam/rgb
-        /rmf_owl/cmd
-        /rmf_owl/imu/data
-        /rmf_owl/lidar/points
         /rmf_owl/odom
-        /rosout
-        /rosout_agg
+        /rmf_owl/drift_odom
         /tf
         /tf_static
     "/>

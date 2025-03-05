@@ -10,6 +10,7 @@
     <plugin filename="libgz-sim-sensors-system.so" name="gz::sim::systems::Sensors">
         <render_engine>ogre2</render_engine>
     </plugin>
+    <plugin filename="libgz-sim-contact-system" name="gz::sim::systems::Contact" />
     <plugin filename="libgz-sim-scene-broadcaster-system.so" name="gz::sim::systems::SceneBroadcaster"></plugin>
     <plugin filename="libgz-sim-user-commands-system.so" name="gz::sim::systems::UserCommands"></plugin>
 

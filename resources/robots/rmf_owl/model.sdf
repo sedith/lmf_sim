@@ -43,7 +43,7 @@
 
 
         <!-- sensors -->
-        <sensor name="imu_sensor" type="imu">
+        <!-- <sensor name="imu_sensor" type="imu">
             <always_on>1</always_on>
             <update_rate>200</update_rate>
             <imu>
@@ -144,7 +144,7 @@
                     </noise>
                 </z>
             </magnetometer>
-        </sensor>
+        </sensor> -->
 
 
         <sensor name="rgb_cam" type="camera">
@@ -170,10 +170,11 @@
             </camera>
         </sensor>
 
+
         <sensor name="depth_cam" type="depth_camera">
             <pose>0.180 0 -0.025 0 0 0</pose>
             <always_on>1</always_on>
-            <update_rate>30</update_rate>
+            <update_rate>5</update_rate>
             <camera name="depth_cam">
                 <horizontal_fov>1.52</horizontal_fov>
                 <image>
@@ -236,9 +237,16 @@
                 </noise>
             </lidar>
         </sensor>
+
+
+        <sensor name='contact' type='contact'>
+            <contact>
+                <collision>base_link_inertia_collision</collision>
+            </contact>
+            <always_on>1</always_on>
+            <update_rate>50</update_rate>
+        </sensor>
     </link>
-
-
 
     <!-- rotors -->
     <link name="rotor_0">
@@ -619,12 +627,12 @@
     <!-- <plugin filename="libgz-sim-multicopter-position-control-system.so" name="gz::sim::systems::MulticopterPositionControl"> -->
     <plugin filename="libgz-sim-multicopter-attitude-control-system.so" name="gz::sim::systems::MulticopterAttitudeControl">
         <robotNamespace>model/rmf_owl</robotNamespace>
-        <commandSubTopic>cmd_att</commandSubTopic>
+        <commandSubTopic>cmd/att</commandSubTopic>
         <motorControlPubTopic>command/motor_speed</motorControlPubTopic>
         <enableSubTopic>enable</enableSubTopic>
         <comLinkName>base_link</comLinkName>
         <positionGain>0 0 0</positionGain>
-        <velocityGain>10 10 10</velocityGain>
+        <velocityGain>0 0 0</velocityGain>
         <attitudeGain>15 15 2</attitudeGain>
         <angularRateGain>2 2 0.2</angularRateGain>
         <maximumLinearVelocity>5 5 5</maximumLinearVelocity>
@@ -670,7 +678,7 @@
 
     <plugin filename="libgz-sim-multicopter-acceleration-control-system.so" name="gz::sim::systems::MulticopterAccelerationControl">
         <robotNamespace>model/rmf_owl</robotNamespace>
-        <commandSubTopic>cmd_acc</commandSubTopic>
+        <commandSubTopic>cmd/acc</commandSubTopic>
         <motorControlPubTopic>command/motor_speed</motorControlPubTopic>
         <enableSubTopic>enable</enableSubTopic>
         <comLinkName>base_link</comLinkName>
