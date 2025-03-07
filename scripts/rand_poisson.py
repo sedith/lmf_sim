@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-import random
+import trimesh
 import numpy as np
 import scipy as sp
 import os
@@ -11,13 +11,27 @@ PATH_WORLDS = os.path.join(PATH_RESOURCES, 'worlds/')
 PATH_MODELS = os.path.join(PATH_RESOURCES, 'environment_assets/')
 
 
+## generate dae of several spheres spheres
+def gen_mesh(positions, radius=0.5):
+    spheres = []
+
+    base_sphere = trimesh.creation.icosphere(subdivisions=3, radius=radius)
+
+    for pos in positions:
+        sphere = base_sphere.copy()
+        sphere.apply_translation(pos)
+        spheres.append(sphere)
+
+    merged_mesh = trimesh.util.concatenate(spheres)
+
+
 ## generate random pose values
-def random_poses(n, radius, range):
+def random_poses(n, radius, range, seed=None):
     poisson_engine = sp.stats.qmc.PoissonDisk(
         d=3,
         radius=radius / range,
-        ncandidates=500,
-        seed=None,
+        ncandidates=1000,
+        seed=seed,
     )
     return (poisson_engine.random(n) - np.array([0.5, 0.5, 0])) * range
 
@@ -33,32 +47,47 @@ if __name__ == '__main__':
         raise ValueError('no <world> element found in the SDF file')
 
     ## add random obstacles
-    chunks_radius = [1.3, 1.3, 1.3]
-    poisson_domain_size = 5
+    chunks_radius = [1.5] * 10
+    seed = 100
+    poisson_domain_size = 4
     x_offset = 2 + poisson_domain_size / 2
-    obs_idx = 0
+    spheres = []
+    base_sphere = trimesh.creation.icosphere(subdivisions=2, radius=0.5)
     for j,r in enumerate(chunks_radius):
-        poisson_obs = random_poses(1000, r, poisson_domain_size)
+        poisson_obs = random_poses(1000, r, poisson_domain_size, seed+j)
         n_obstacles = poisson_obs.shape[0]
         print(f'placing {n_obstacles} obstacles in the chunk {j} (Poisson radius: {r})')
-        for i in range(n_obstacles):
-            include = ET.Element('include')
 
-            static = ET.SubElement(include, 'static')
-            static.text = 'true'
 
-            name = ET.SubElement(include, 'name')
-            name.text = f'obs_{obs_idx}'
-            obs_idx += 1
+        for pos in poisson_obs:
+            sphere = base_sphere.copy()
+            sphere.apply_translation(pos + [x_offset, 0, 0])
+            spheres.append(sphere)
 
-            pose = ET.SubElement(include, 'pose')
-            pose.text = f'{poisson_obs[i][0] + x_offset} {poisson_obs[i][1]} {poisson_obs[i][2]} 0 0 0'
-
-            uri = ET.SubElement(include, 'uri')
-            uri.text = os.path.join(PATH_MODELS, 'objects_large/sphere_50cm.urdf')
-
-            world.append(include)
         x_offset += poisson_domain_size + 1
+
+    ## export dae
+    mesh_filename = os.path.join(PATH_MODELS, 'random_spheres.dae')
+    merged_mesh = trimesh.util.concatenate(spheres)
+    merged_mesh.export(mesh_filename)
+
+    ## add model to sdf
+    model = ET.SubElement(world, 'model', name='random_spheres')
+    static = ET.SubElement(model, 'static')
+    static.text = 'true'
+    link = ET.SubElement(model, 'link', name='base_link')
+
+    visual = ET.SubElement(link, 'visual', name='merged_visual')
+    visual_geom = ET.SubElement(visual, 'geometry')
+    visual_mesh = ET.SubElement(visual_geom, 'mesh')
+    visual_uri = ET.SubElement(visual_mesh, 'uri')
+    visual_uri.text = f'{mesh_filename}'
+
+    collision = ET.SubElement(link, 'collision', name='merged_collision')
+    collision_geom = ET.SubElement(collision, 'geometry')
+    collision_mesh = ET.SubElement(collision_geom, 'mesh')
+    collision_uri = ET.SubElement(collision_mesh, 'uri')
+    collision_uri.text = f'{mesh_filename}'
 
     ## update ground
     s_x = len(chunks_radius) * (poisson_domain_size + 1) + 4  # from -1m to 1m past the obstacles
