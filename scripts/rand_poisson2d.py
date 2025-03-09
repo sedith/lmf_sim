@@ -14,12 +14,12 @@ PATH_MODELS = os.path.join(PATH_RESOURCES, 'environment_assets/')
 ## generate random pose values
 def random_poses(n, radius, range, seed=None):
     poisson_engine = sp.stats.qmc.PoissonDisk(
-        d=3,
+        d=2,
         radius=radius / range,
-        ncandidates=500,
+        ncandidates=2000,
         seed=seed,
     )
-    return (poisson_engine.random(n) - np.array([0.5, 0.5, 0])) * range
+    return (poisson_engine.random(n) - np.array([0.5, 0.5])) * range
 
 
 if __name__ == '__main__':
@@ -34,31 +34,30 @@ if __name__ == '__main__':
 
     ## add random obstacles
     chunks_radius = [1.5] * 10
-    seed = 900
+    seed = 100
     poisson_domain_size = 4
     x_offset = 2 + poisson_domain_size / 2
     meshes = []
-    base_mesh = trimesh.creation.icosphere(subdivisions=2, radius=0.5)
+    base_mesh = trimesh.creation.cylinder(radius=0.3, height=poisson_domain_size)
     for j,r in enumerate(chunks_radius):
         poisson_obs = random_poses(1000, r, poisson_domain_size, seed+j)
         n_obstacles = poisson_obs.shape[0]
         print(f'placing {n_obstacles} obstacles in the chunk {j} (Poisson radius: {r})')
 
-
         for pos in poisson_obs:
             mesh = base_mesh.copy()
-            mesh.apply_translation(pos + [x_offset, 0, 0])
+            mesh.apply_translation([pos[0] + x_offset, pos[1], poisson_domain_size / 2])
             meshes.append(mesh)
 
         x_offset += poisson_domain_size + 1
 
     ## export dae
-    mesh_filename = os.path.join(PATH_MODELS, 'random_spheres.dae')
+    mesh_filename = os.path.join(PATH_MODELS, 'random_pillars.dae')
     merged_mesh = trimesh.util.concatenate(meshes)
     merged_mesh.export(mesh_filename)
 
     ## add model to sdf
-    model = ET.SubElement(world, 'model', name='random_spheres')
+    model = ET.SubElement(world, 'model', name='random_pillars')
     static = ET.SubElement(model, 'static')
     static.text = 'true'
     link = ET.SubElement(model, 'link', name='base_link')
@@ -111,6 +110,6 @@ if __name__ == '__main__':
     world.append(rwall)
 
     ## write the updated SDF file to a new file
-    tree.write(os.path.join(PATH_WORLDS, 'random3d.sdf'), xml_declaration=True, method='xml', encoding='UTF-8')
+    tree.write(os.path.join(PATH_WORLDS, 'random2d.sdf'), xml_declaration=True, method='xml', encoding='UTF-8')
 
     print('randomization complete, new world file saved')
