@@ -55,11 +55,11 @@
         </link>
     </model>
 
-    <!-- <include>
+    <include>
         <name>rmf_owl</name>
         <pose>0 0 0.5 0 0 0</pose>
         <uri>/home/sedith/work/colpred_ws/sim_ws/src/lmf_sim//resources/robots/rmf_owl/model.sdf</uri>
-    </include> -->
+    </include>
 
     <!-- obstacles -->
 </world>

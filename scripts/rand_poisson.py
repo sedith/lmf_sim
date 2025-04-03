@@ -16,7 +16,7 @@ def random_poses(n, radius, range, seed=None):
     poisson_engine = sp.stats.qmc.PoissonDisk(
         d=3,
         radius=radius / range,
-        ncandidates=500,
+        ncandidates=1000,
         seed=seed,
     )
     return (poisson_engine.random(n) - np.array([0.5, 0.5, 0])) * range

@@ -16,7 +16,7 @@ def random_poses(n, radius, range, seed=None):
     poisson_engine = sp.stats.qmc.PoissonDisk(
         d=2,
         radius=radius / range,
-        ncandidates=2000,
+        ncandidates=500,
         seed=seed,
     )
     return (poisson_engine.random(n) - np.array([0.5, 0.5])) * range
@@ -33,12 +33,12 @@ if __name__ == '__main__':
         raise ValueError('no <world> element found in the SDF file')
 
     ## add random obstacles
-    chunks_radius = [1.5] * 10
-    seed = 100
+    chunks_radius = [2] * 2
+    seed = 200
     poisson_domain_size = 4
     x_offset = 2 + poisson_domain_size / 2
     meshes = []
-    base_mesh = trimesh.creation.cylinder(radius=0.3, height=poisson_domain_size)
+    base_mesh = trimesh.creation.cylinder(radius=0.5, height=poisson_domain_size)
     for j,r in enumerate(chunks_radius):
         poisson_obs = random_poses(1000, r, poisson_domain_size, seed+j)
         n_obstacles = poisson_obs.shape[0]

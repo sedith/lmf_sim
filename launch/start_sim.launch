@@ -12,7 +12,7 @@
     <arg name="verbosity" default="4"/>
     <arg name="version" default="7.4.0"/>
     <arg name="world" default="empty"/>
-    <arg name="headless" default="false"/>
+    <arg name="headless" default="true"/>
 
     <arg name="headless_args" value="-s --headless-rendering" if="$(arg headless)"/>
     <arg name="headless_args" value="" if="$(eval arg('headless') == false)"/>
@@ -41,7 +41,7 @@
     />
 
     <!-- spawn robot -->
-    <node pkg="ros_ign_gazebo" type="create" name="spawn_model" args="
+    <!-- <node pkg="ros_ign_gazebo" type="create" name="spawn_model" args="
         -world map
         -name $(arg robot_name)
         -file $(find lmf_sim)/resources/robots/$(arg robot_type)/model.sdf
@@ -50,7 +50,7 @@
         ">
         <env name="GZ_SIM_MODEL_PATH" value="$(find lmf_sim)/resources" />
         <env name="GZ_SIM_RESOURCE_PATH" value="$(find lmf_sim)/resources" />
-    </node>
+    </node> -->
 
     <include file="$(find lmf_sim)/launch/topics.launch">
         <arg name="world" value="$(arg world)" />
