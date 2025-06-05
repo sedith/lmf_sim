@@ -33,9 +33,9 @@ if __name__ == '__main__':
         raise ValueError('no <world> element found in the SDF file')
 
     ## add random obstacles
-    chunks_radius = [1.5] * 10
-    seed = 900
-    poisson_domain_size = 4
+    chunks_radius = [2] * 6
+    seed = 1500
+    poisson_domain_size = 8
     x_offset = 2 + poisson_domain_size / 2
     meshes = []
     base_mesh = trimesh.creation.icosphere(subdivisions=2, radius=0.5)

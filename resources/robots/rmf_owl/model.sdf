@@ -43,7 +43,7 @@
 
 
         <!-- sensors -->
-        <!-- <sensor name="imu_sensor" type="imu">
+        <!-- <sensor name="imu" type="imu">
             <always_on>1</always_on>
             <update_rate>200</update_rate>
             <imu>
@@ -184,7 +184,7 @@
                 </image>
                 <clip>
                     <near>0.02</near>
-                    <far>5</far>
+                    <far>10</far>
                 </clip>
                 <noise>
                     <type>gaussian</type>
@@ -205,11 +205,9 @@
             </geometry>
         </visual>
         <sensor name="lidar" type="gpu_ray">
-            <!-- The laser is patterned off of the X1 medium range lidar. -->
             <pose>0 0 0.05 0 0 0</pose>
-            <update_rate>5</update_rate>
-            <visualize>true</visualize>
-            <always_on>true</always_on>
+            <always_on>1</always_on>
+            <update_rate>10</update_rate>
             <lidar>
                 <scan>
                     <horizontal>
@@ -227,7 +225,7 @@
                 </scan>
                 <range>
                     <min>0.22</min>
-                    <max>5</max>
+                    <max>10</max>
                     <resolution>0.01</resolution>
                 </range>
                 <noise>
@@ -239,13 +237,13 @@
         </sensor>
 
 
-        <sensor name='contact' type='contact'>
+        <!-- <sensor name='contact' type='contact'>
             <contact>
                 <collision>base_link_inertia_collision</collision>
             </contact>
             <always_on>1</always_on>
             <update_rate>50</update_rate>
-        </sensor>
+        </sensor> -->
     </link>
 
     <!-- rotors -->
@@ -529,18 +527,8 @@
         <publish_nested_model_pose>true</publish_nested_model_pose>
         <use_pose_vector_msg>true</use_pose_vector_msg>
         <static_publisher>true</static_publisher>
-        <static_update_frequency>60</static_update_frequency>
+        <static_update_frequency>50</static_update_frequency>
     </plugin>
-
-    <!-- <plugin filename="libgz-sim-pose-publisher-system.so" name="gz::sim::systems::PosePublisher">
-        <publish_link_pose>false</publish_link_pose>
-        <publish_sensor_pose>false</publish_sensor_pose>
-        <publish_collision_pose>false</publish_collision_pose>
-        <publish_visual_pose>false</publish_visual_pose>
-        <publish_nested_model_pose>true</publish_nested_model_pose>
-        <use_pose_vector_msg>true</use_pose_vector_msg>
-        <static_publisher>false</static_publisher>
-    </plugin> -->
 
     <plugin filename="libgz-sim-odometry-publisher-system.so" name="gz::sim::systems::OdometryPublisher">
         <dimensions>3</dimensions>
@@ -549,6 +537,7 @@
 
     <plugin filename="libgz-sim-multicopter-motor-model-system.so" name="gz::sim::systems::MulticopterMotorModel">
         <robotNamespace>model/rmf_owl</robotNamespace>
+        <commandSubTopic>cmd/motor</commandSubTopic>
         <jointName>rotor_0_joint</jointName>
         <linkName>rotor_0</linkName>
         <turningDirection>ccw</turningDirection>
@@ -557,7 +546,6 @@
         <maxRotVelocity>1000.0</maxRotVelocity>
         <motorConstant>0.02246</motorConstant>
         <momentConstant>0.016754</momentConstant>
-        <commandSubTopic>command/motor_speed</commandSubTopic>
         <motorNumber>0</motorNumber>
         <rotorDragCoefficient>2.0673e-04</rotorDragCoefficient>
         <rollingMomentCoefficient>0</rollingMomentCoefficient>
@@ -568,6 +556,7 @@
 
     <plugin filename="libgz-sim-multicopter-motor-model-system.so" name="gz::sim::systems::MulticopterMotorModel">
         <robotNamespace>model/rmf_owl</robotNamespace>
+        <commandSubTopic>cmd/motor</commandSubTopic>
         <jointName>rotor_1_joint</jointName>
         <linkName>rotor_1</linkName>
         <turningDirection>ccw</turningDirection>
@@ -576,7 +565,6 @@
         <maxRotVelocity>1000.0</maxRotVelocity>
         <motorConstant>0.02246</motorConstant>
         <momentConstant>0.016754</momentConstant>
-        <commandSubTopic>command/motor_speed</commandSubTopic>
         <motorNumber>1</motorNumber>
         <rotorDragCoefficient>2.0673e-04</rotorDragCoefficient>
         <rollingMomentCoefficient>0</rollingMomentCoefficient>
@@ -587,6 +575,7 @@
 
     <plugin filename="libgz-sim-multicopter-motor-model-system.so" name="gz::sim::systems::MulticopterMotorModel">
         <robotNamespace>model/rmf_owl</robotNamespace>
+        <commandSubTopic>cmd/motor</commandSubTopic>
         <jointName>rotor_2_joint</jointName>
         <linkName>rotor_2</linkName>
         <turningDirection>cw</turningDirection>
@@ -595,7 +584,6 @@
         <maxRotVelocity>1000.0</maxRotVelocity>
         <motorConstant>0.02246</motorConstant>
         <momentConstant>0.016754</momentConstant>
-        <commandSubTopic>command/motor_speed</commandSubTopic>
         <motorNumber>2</motorNumber>
         <rotorDragCoefficient>2.0673e-04</rotorDragCoefficient>
         <rollingMomentCoefficient>0</rollingMomentCoefficient>
@@ -606,6 +594,7 @@
 
     <plugin filename="libgz-sim-multicopter-motor-model-system.so" name="gz::sim::systems::MulticopterMotorModel">
         <robotNamespace>model/rmf_owl</robotNamespace>
+        <commandSubTopic>cmd/motor</commandSubTopic>
         <jointName>rotor_3_joint</jointName>
         <linkName>rotor_3</linkName>
         <turningDirection>cw</turningDirection>
@@ -614,7 +603,6 @@
         <maxRotVelocity>1000.0</maxRotVelocity>
         <motorConstant>0.02246</motorConstant>
         <momentConstant>0.016754</momentConstant>
-        <commandSubTopic>command/motor_speed</commandSubTopic>
         <motorNumber>3</motorNumber>
         <rotorDragCoefficient>2.0673e-04</rotorDragCoefficient>
         <rollingMomentCoefficient>0</rollingMomentCoefficient>

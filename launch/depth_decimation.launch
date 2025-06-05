@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="cam_info_topic" value="/oak/stereo/camera_info"/>
-    <arg name="depth_topic" value="/oak/stereo/image_raw"/>
-    <arg name="decimation_factor" value="5"/>
+    <arg name="cam_info_topic" default="/oak/stereo/camera_info"/>
+    <arg name="depth_topic" default="/oak/stereo/image_raw"/>
+    <arg name="decimation_factor" default="5"/>
 
     <node pkg="image_proc" type="image_proc" name="image_proc"/>
     <node pkg="nodelet" type="nodelet" name="downsample_depth" args="standalone image_proc/crop_decimate">

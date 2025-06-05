@@ -41,7 +41,7 @@
     />
 
     <!-- spawn robot -->
-    <!-- <node pkg="ros_ign_gazebo" type="create" name="spawn_model" args="
+    <node pkg="ros_ign_gazebo" type="create" name="spawn_model" args="
         -world map
         -name $(arg robot_name)
         -file $(find lmf_sim)/resources/robots/$(arg robot_type)/model.sdf
@@ -50,8 +50,9 @@
         ">
         <env name="GZ_SIM_MODEL_PATH" value="$(find lmf_sim)/resources" />
         <env name="GZ_SIM_RESOURCE_PATH" value="$(find lmf_sim)/resources" />
-    </node> -->
+    </node>
 
+    <!-- topics -->
     <include file="$(find lmf_sim)/launch/topics.launch">
         <arg name="world" value="$(arg world)" />
         <arg name="robot_name" value="$(arg robot_name)" />
@@ -60,6 +61,7 @@
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher2"
     args="0 0 0 0 0 0 1.0 /map /$(arg robot_name)/odom" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="tf_depth_cam_optical" args="0 0 0 0.5 -0.5 0.5 -0.5 rmf_owl/base_link/depth_cam rmf_owl/base_link/depth_cam/optical" />
 
     <include if="$(arg record)" file="$(find lmf_sim)/launch/bag_rec.launch" >
         <arg name="record_path" value="$(arg record_path)"/>

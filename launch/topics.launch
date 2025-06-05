@@ -32,24 +32,29 @@
     </node>
 
     <group ns="$(arg robot_name)">
-        <!-- <group if="$(eval arg('control_mode') == 'acc')"> -->
-            <node
-                pkg="ros_ign_bridge"
-                type="parameter_bridge"
-                name="ros_ign_bridge_twist"
-                args="/model/$(arg robot_name)/cmd/acc@geometry_msgs/Twist@gz.msgs.Twist">
-                <remap from="/model/$(arg robot_name)/cmd/acc" to="cmd/acc"/>
-            </node>
-        <!-- </group>
-        <group if="$(eval arg('control_mode') == 'att')"> -->
-            <node
-                pkg="ros_ign_bridge"
-                type="parameter_bridge"
-                name="ros_ign_bridge_cmd"
-                args="/model/$(arg robot_name)/cmd/att@geometry_msgs/Quaternion@gz.msgs.Quaternion">
-                <remap from="/model/$(arg robot_name)/cmd/att" to="cmd/att"/>
-            </node>
-        <!-- </group> -->
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_twist"
+            args="/model/$(arg robot_name)/cmd/acc@geometry_msgs/Twist@gz.msgs.Twist">
+            <remap from="/model/$(arg robot_name)/cmd/acc" to="cmd/acc"/>
+        </node>
+
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_quat"
+            args="/model/$(arg robot_name)/cmd/att@geometry_msgs/Quaternion@gz.msgs.Quaternion">
+            <remap from="/model/$(arg robot_name)/cmd/att" to="cmd/att"/>
+        </node>
+
+        <node
+            pkg="ros_ign_bridge"
+            type="parameter_bridge"
+            name="ros_ign_bridge_actuators"
+            args="/model/$(arg robot_name)/cmd/motor@mav_msgs/Actuators@gz.msgs.Actuators">
+            <remap from="/model/$(arg robot_name)/cmd/motor" to="cmd/motor"/>
+        </node>
 
         <node
             pkg="ros_ign_bridge"
@@ -104,12 +109,12 @@
 
 
         <!-- IMU -->
-        <!-- <node
+        <node
             pkg="ros_ign_bridge"
             type="parameter_bridge"
             name="ros_ign_bridge_imu"
-            args="$(arg sensor_prefix)/imu_sensor/imu@sensor_msgs/Imu[gz.msgs.IMU">
-            <remap from="$(arg sensor_prefix)/imu_sensor/imu" to="imu/data"/>
-        </node> -->
+            args="$(arg sensor_prefix)/imu/imu@sensor_msgs/Imu[gz.msgs.IMU">
+            <remap from="$(arg sensor_prefix)/imu/imu" to="imu"/>
+        </node>
     </group>
 </launch>
